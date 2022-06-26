@@ -13,7 +13,7 @@
 
 
 
-<title>面试题整理 | Cecilia 的博客(๑•̀ㅂ•́)و✧</title>
+<title>前端基础——Html篇 | Cecilia 的博客(๑•̀ㅂ•́)و✧</title>
 
 
 
@@ -192,7 +192,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">面试题整理</h1>
+            <h1 class="post-title">前端基础——Html篇</h1>
             
                 <div class="post-meta">
                     
@@ -201,14 +201,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">June 21, 2022&nbsp;&nbsp;22:10:00</a>
+                        Date: <a href="#">June 26, 2022&nbsp;&nbsp;16:48:28</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/%E9%A2%98%E5%BA%93/">题库</a>
+                                <a href="/categories/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E6%95%B4%E7%90%86/">知识体系整理</a>
                             
                         </span>
                     
@@ -217,26 +217,46 @@
         </header>
 
         <div class="post-content">
-            <blockquote>
-<p>针对面试过程中遇到的一些回答得不是很好、或有记忆性的面试题做总结。</p>
-</blockquote>
-<h2 id="1、跨域问题的处理？"><a href="#1、跨域问题的处理？" class="headerlink" title="1、跨域问题的处理？"></a>1、跨域问题的处理？</h2><ol>
-<li>通过<code>jsonp</code>跨域。原理：动态加载<code>script</code>文件，同时定义一个<code>callback</code>函数给<code>script</code>执行；</li>
-<li>通过<code>document.domain + iframe</code>来跨子域（只有当主域相同时）；</li>
-<li><code>document.name + iframe</code>；</li>
-<li><code>window.postMessage</code>；</li>
-<li>使用跨域资源共享（<code>CORS</code>）；</li>
-<li><code>Web Sockets</code>。一种浏览器<code>API</code>，目标是在一个单独的持久连接上提供全双工、双向通信（同源策略对它不适用）。</li>
+            <h2 id="如何理解html语义化？"><a href="#如何理解html语义化？" class="headerlink" title="如何理解html语义化？"></a>如何理解html语义化？</h2><ol>
+<li>让人更容易读懂（代码可读性）；</li>
+<li>让搜索引擎更易读懂（利于<code>SEO</code>）。</li>
+<li>&#x3D;&#x3D;语义结构仅仅是页面结构的规范化，并不会对内容有本质的影响。&#x3D;&#x3D;</li>
 </ol>
-<h2 id="2、数组的splice和slice的区别？"><a href="#2、数组的splice和slice的区别？" class="headerlink" title="2、数组的splice和slice的区别？"></a>2、数组的splice和slice的区别？</h2><ul>
-<li><code>slice()</code>：从已有数组中返回选择的某段数组元素，不会改变原始数组；</li>
-<li><code>splice()</code>：从数组中添加或删除元素，然后返回被删除的数组元素，会改变原数组。</li>
+<h2 id="元信息类标签"><a href="#元信息类标签" class="headerlink" title="元信息类标签"></a>元信息类标签</h2><p>元信息类标签：<code>head</code>、<code>title</code>、<code>meta</code>。</p>
+<h3 id="1、head标签"><a href="#1、head标签" class="headerlink" title="1、head标签"></a>1、<code>head</code>标签</h3><p><code>head</code>标签本身<strong>并不携带任何信息</strong>，它主要是作为盛放其它语义化标签的容器使用。</p>
+<p><code>head</code>标签规定了自身必须是<code>html</code>标签中的第一个标签，它的内容必须包含一个<code>title</code> ,且只能包含一个<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_base.asp"><code>base</code></a>。如果文档作为<code>iframe</code>，或者有其它方式制定了文档标题的话，可以允许不包含<code>title</code>标签。</p>
+<h3 id="2、title标签"><a href="#2、title标签" class="headerlink" title="2、title标签"></a>2、<code>title</code>标签</h3><p><code>title</code>作为元信息，可能会被用在浏览器收藏夹、微信推送卡片等场景，所以<code>title</code><strong>应该是完整的概括整个网页内容的</strong>。</p>
+<h3 id="3、meta标签"><a href="#3、meta标签" class="headerlink" title="3、meta标签"></a>3、<code>meta</code>标签</h3><p>在<code>head</code>中可以出现多个<code>meta</code>标签。一般的<code>meta</code>标签由<code>name</code>和<code>content</code>两个属性来定义。</p>
+<h4 id="name为viewport的meta"><a href="#name为viewport的meta" class="headerlink" title="name为viewport的meta"></a><code>name</code>为<code>viewport</code>的<code>meta</code></h4><p>使用于移动端。它的<code>content</code>是一个复杂结构，能配置的全部属性如下：</p>
+<ul>
+<li><code>width</code>：页面宽度，可以取值具体的数字，也可以是<code>device-width</code>，表示跟设备宽度相等。</li>
+<li><code>height</code>：页面高度，可以取值具体的数字，也可以是<code>device-height</code>，表示跟设备高度相等。</li>
+<li><code>initial-scale</code>：初始缩放比例。</li>
+<li><code>minimum-scale</code>：最小缩放比例。</li>
+<li><code>maximum-scale</code>：最大缩放比例。</li>
+<li><code>user-scalable</code>：是否允许用户缩放。</li>
 </ul>
-<h2 id="3、防抖和节流"><a href="#3、防抖和节流" class="headerlink" title="3、防抖和节流"></a>3、防抖和节流</h2><ul>
-<li>防抖：指触发事件后在<code>n</code>秒内函数只能执行一次，如果在<code>n</code>秒内又触发了事件，则会重新计算函数执行时间。</li>
-<li>节流：指连续触发事件但是在<code>n</code>秒内中只执行一次函数。可以使用定时器实现。</li>
+<p>一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;meta name=<span class="string">&quot;viewport&quot;</span> content=<span class="string">&quot;width=device, initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no&quot;</span>&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="其它预定义的meta"><a href="#其它预定义的meta" class="headerlink" title="其它预定义的meta"></a>其它预定义的<code>meta</code></h4><ul>
+<li><code>keywords</code>：页面关键字，对于<code>SEO</code>场景非常关键。</li>
+<li><code>referrer</code>：跳转策略，是一种安全考量。</li>
+<li><code>description</code>：页面描述，可能被用于搜索引擎或者其它场景。</li>
 </ul>
-<h2 id="4、Promise的使用场景？"><a href="#4、Promise的使用场景？" class="headerlink" title="4、Promise的使用场景？"></a>4、Promise的使用场景？</h2><h2 id="5、Less和Sass"><a href="#5、Less和Sass" class="headerlink" title="5、Less和Sass"></a>5、Less和Sass</h2><h2 id="6、Ajax原理"><a href="#6、Ajax原理" class="headerlink" title="6、Ajax原理"></a>6、Ajax原理</h2><h2 id="7、doctype"><a href="#7、doctype" class="headerlink" title="7、doctype"></a>7、doctype</h2><h2 id="8、seo"><a href="#8、seo" class="headerlink" title="8、seo"></a>8、seo</h2><h2 id="9、iframe"><a href="#9、iframe" class="headerlink" title="9、iframe"></a>9、iframe</h2><h2 id="10、路由钩子"><a href="#10、路由钩子" class="headerlink" title="10、路由钩子"></a>10、路由钩子</h2><h2 id="11、路由懒加载"><a href="#11、路由懒加载" class="headerlink" title="11、路由懒加载"></a>11、路由懒加载</h2><h2 id="12、axios的特点"><a href="#12、axios的特点" class="headerlink" title="12、axios的特点"></a>12、axios的特点</h2><h2 id="13、数组去重有哪几种方法"><a href="#13、数组去重有哪几种方法" class="headerlink" title="13、数组去重有哪几种方法"></a>13、数组去重有哪几种方法</h2><h2 id="14、vue单页面和多页面优缺点"><a href="#14、vue单页面和多页面优缺点" class="headerlink" title="14、vue单页面和多页面优缺点"></a>14、vue单页面和多页面优缺点</h2><h2 id="15、get和post的区别"><a href="#15、get和post的区别" class="headerlink" title="15、get和post的区别"></a>15、get和post的区别</h2>
+<h2 id="HTML5离线缓存原理"><a href="#HTML5离线缓存原理" class="headerlink" title="HTML5离线缓存原理"></a><code>HTML5</code>离线缓存原理</h2><p><strong>离线缓存</strong>：在用户没有与因特网连接时，可以正常访问站点或应用，在用户与因特网连接时，更新用户机器上的缓存文件。</p>
+<p><strong>使用离线缓存的目的</strong>：</p>
+<ul>
+<li>离线状态也能正常访问</li>
+<li>提高访问速度</li>
+<li>减轻服务器响应压力</li>
+</ul>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/294955ec653a">HTML5 的离线储存及其工作原理</a></p>
+<h3 id="1、Service-Workers"><a href="#1、Service-Workers" class="headerlink" title="1、Service Workers"></a>1、<code>Service Workers</code></h3><p>原理：<code>Service Workers</code>本质上充当<code>Web</code>应用程序、浏览器与网络（可用时）之间的代理服务器。这个<code>API</code>指在创建有效的离线体验，它会拦截网络请求并根据网络是否可用采取来适当的动作、更新来自服务器的的资源。它还提供入口以推送通知和访问后台同步<code>API</code>。</p>
+<h3 id="2、manifest"><a href="#2、manifest" class="headerlink" title="2、manifest"></a>2、<code>manifest</code></h3><p>原理：<code>HTML5</code>的离线存储是基于一个新建的<code>.appcache</code> 文件的缓存机制（不是存储技术） , 通过这个文件上的解析清单离线存储资源，这些资源就会像<code>cookie</code> 一样被存储了下来。之后当网络在处于离线状态下时，浏览器会通过被离线存储的数据进行页面展示。</p>
+<h2 id="对SEO的理解"><a href="#对SEO的理解" class="headerlink" title="对SEO的理解"></a>对<code>SEO</code>的理解</h2><p><code>SEO</code>：（<code>Search Engine Optimization</code>）搜索引擎优化，是一种利用搜索引擎的规则提高网站在有关搜索引擎内自然排名的方式。</p>
+<h3 id="如何实现SEO"><a href="#如何实现SEO" class="headerlink" title="如何实现SEO ?"></a>如何实现<code>SEO</code> ?</h3><p><code>meta</code>标签优化，设置TDK（T：title、D：description、K：keyword）。</p>
+
         </div>
 
         
@@ -261,6 +281,8 @@
                     
                         <a href="/tags/%E9%9D%A2%E8%AF%95/"># 面试</a>
                     
+                        <a href="/tags/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"># 前端基础</a>
+                    
                         
                 </span>
             </div>
@@ -272,8 +294,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/06/26/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Html%E7%AF%87/">前端基础——Html篇</a>
             
+            <a class="next" rel="next" href="/2022/06/21/%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/">面试题整理</a>
             
         </section>
 
