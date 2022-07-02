@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Cecilia Li">
+
+
+
+
+
+<title>前端基础 - CSS篇 | Cecilia 的博客(๑•̀ㅂ•́)و✧</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Cecilia&#39;s Blog (๑•̀ㅂ•́)و✧</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Cecilia&#39;s Blog (๑•̀ㅂ•́)و✧</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">前端基础 - CSS篇</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Cecilia Li</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 2, 2022&nbsp;&nbsp;16:16:02</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Flex-布局"><a href="#Flex-布局" class="headerlink" title="Flex 布局"></a><code>Flex</code> 布局</h2><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html">阮一峰的<code>flex</code>系列</a></p>
+<h3 id="1、基本概念"><a href="#1、基本概念" class="headerlink" title="1、基本概念"></a>1、基本概念</h3><p>采用<code>Flex</code>布局的元素，称为<code>Flex</code>容器（<code>flex container</code>），简称”容器”。它的所有子元素自动成为容器成员，称为<code>Flex</code>项目（<code>flex item</code>），简称”项目”。</p>
+<p>容器默认存在两根轴：水平的主轴（<code>main axis</code>）和垂直的交叉轴（<code>cross axis</code>）。主轴的开始位置（与边框的交叉点）叫做<code>main start</code>，结束位置叫做<code>main end</code>；交叉轴的开始位置叫做<code>cross start</code>，结束位置叫做<code>cross end</code>。</p>
+<p>项目默认沿主轴排列。单个项目占据的主轴空间叫做<code>main size</code>，占据的交叉轴空间叫做<code>cross size</code>。</p>
+<h3 id="2、容器的属性"><a href="#2、容器的属性" class="headerlink" title="2、容器的属性"></a>2、容器的属性</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>用途</th>
+<th>取值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>flex-direction</code></td>
+<td>决定主轴方向</td>
+<td><code>row</code>（默认）、<code>row-reverse</code>、<code>column</code>、<code>column-reverse</code></td>
+</tr>
+<tr>
+<td><code>flex-wrap</code></td>
+<td>定义如果一条轴线排不下，如何换行</td>
+<td><code>no-wrap</code>（默认）、<code>wrap</code>、<code>wrap-reverse</code></td>
+</tr>
+<tr>
+<td><code>flex-flow</code></td>
+<td><code>flex-direction</code>和<code>flex-wrap</code>的简写形式</td>
+<td>默认值为<code>row no-erap</code></td>
+</tr>
+<tr>
+<td><code>justify-content</code></td>
+<td>主轴上的对齐方向</td>
+<td><code>flex-start</code>（默认）、<code>flex-end</code>、<code>center</code>、<code>space-between</code>、<code>space-around</code></td>
+</tr>
+<tr>
+<td><code>align-items</code></td>
+<td>交叉轴上的对齐方向</td>
+<td><code>flex-start</code>、<code>flex-end</code>、<code>center</code>、<code>baseline</code>、<code>stretch</code>（默认）</td>
+</tr>
+<tr>
+<td><code>align-content</code></td>
+<td>定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。</td>
+<td><code>flex-start</code>（默认）、<code>flex-end</code>、<code>center</code>、<code>space-between</code>、<code>space-around</code>、 <code>、</code> stretch &#96;（默认）</td>
+</tr>
+</tbody></table>
+<h3 id="3、项目的属性"><a href="#3、项目的属性" class="headerlink" title="3、项目的属性"></a>3、项目的属性</h3><ul>
+<li><code>order</code></li>
+<li><code>flex-grow</code></li>
+<li><code>flex-shrink</code></li>
+<li><code>flex-basis</code></li>
+<li><code>flex</code></li>
+<li><code>align-self</code></li>
+</ul>
+<hr>
+<h2 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a><code>BFC</code></h2><h3 id="1、什么是BFC？"><a href="#1、什么是BFC？" class="headerlink" title="1、什么是BFC？"></a>1、什么是<code>BFC</code>？</h3><p><code>Block Format Context</code>（块级格式上下文）。</p>
+<h3 id="2、触发条件："><a href="#2、触发条件：" class="headerlink" title="2、触发条件："></a>2、触发条件：</h3><ol>
+<li>根元素；</li>
+<li><code>float</code>值不为<code>none</code>；</li>
+<li><code>position</code>为<code>absolute</code>或<code>fixed</code>；</li>
+<li><code>overflow</code>不为<code>visible</code>；</li>
+<li><code>display</code>为<code>flex</code>&#x2F;<code>inline-block</code>&#x2F;<code>table-cell</code>&#x2F;<code>table-caption</code>。</li>
+</ol>
+<h3 id="3、应用："><a href="#3、应用：" class="headerlink" title="3、应用："></a>3、应用：</h3><ul>
+<li><code>BFC</code>中浮动元素高度也会参与计算，可用于防止浮动导致父元素高度塌陷（清除浮动）；</li>
+<li>避免上下边距重叠。</li>
+</ul>
+<h2 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h2><p><code>offsetWidth</code> &#x3D; （内容宽度 + <code>padding</code> + <code>border</code>），无外边距。</p>
+<h3 id="box-sizing属性："><a href="#box-sizing属性：" class="headerlink" title="box-sizing属性："></a><code>box-sizing</code>属性：</h3><ul>
+<li><code>content-box</code>：默认值。此时为标准盒模型；<code>content</code> &#x3D; 内容宽度</li>
+<li><code>border-box</code>：<code>IE</code>盒模型；<code>content</code> &#x3D; 内容宽度 + <code>padding</code> + <code>border</code></li>
+</ul>
+<h2 id="CSS选择器"><a href="#CSS选择器" class="headerlink" title="CSS选择器"></a><code>CSS</code>选择器</h2><h3 id="1、CSS选择器有哪些？"><a href="#1、CSS选择器有哪些？" class="headerlink" title="1、CSS选择器有哪些？"></a>1、<code>CSS</code>选择器有哪些？</h3><ol>
+<li>简单选择器，如<code>id</code>选择器、类选择器、标签选择器；</li>
+<li>组合器选择器，如后代选择器<code>li a</code>、子选择器<code>&gt;</code>、相邻兄弟选择器<code>+</code>、通用兄弟选择器<code>~</code>；</li>
+<li>伪类选择器，如<code>a:hover</code>、<code>a:link</code>、<code>a:visited</code>、<code>a:active</code>、<code>p:nth-child(n)</code>；</li>
+<li>伪元素选择器，如<code>p::after</code>、<code>p::before</code>；</li>
+<li>属性选择器，如<code>a[attribute=&quot;value&quot;]</code>。</li>
+</ol>
+<h4 id="1-1-后代选择器-div-p"><a href="#1-1-后代选择器-div-p" class="headerlink" title="1.1 后代选择器(div p)"></a>1.1 后代选择器<code>(div p)</code></h4><p>匹配属于指定元素后代的所有元素。包括但不仅限于子元素。</p>
+<h4 id="1-2-子选择器-div-gt-p"><a href="#1-2-子选择器-div-gt-p" class="headerlink" title="1.2 子选择器(div &gt; p)"></a>1.2 子选择器<code>(div &gt; p)</code></h4><p>匹配属于指定元素子元素的所有元素（仅一层元素）。</p>
+<h4 id="1-3-相邻兄弟选择器-div-p"><a href="#1-3-相邻兄弟选择器-div-p" class="headerlink" title="1.3 相邻兄弟选择器(div + p)"></a>1.3 相邻兄弟选择器<code>(div + p)</code></h4><p>匹配所有作为指定元素的相邻同级的元素。</p>
+<h4 id="1-4-通用兄弟选择器-div-p"><a href="#1-4-通用兄弟选择器-div-p" class="headerlink" title="1.4 通用兄弟选择器(div ~ p)"></a>1.4 通用兄弟选择器<code>(div ~ p)</code></h4><p>匹配属于指定元素的同级元素的所有元素。</p>
+<h4 id="1-5-伪类与伪元素的区别"><a href="#1-5-伪类与伪元素的区别" class="headerlink" title="1.5 伪类与伪元素的区别"></a>1.5 伪类与伪元素的区别</h4><p>伪类的效果可以通过添加一个实际的类来达到，<br>而伪元素的效果则需要通过添加一个实际的元素才能达到。</p>
+<h3 id="2、优先级"><a href="#2、优先级" class="headerlink" title="2、优先级"></a>2、优先级</h3><p><code>!important</code> &gt; [ <code>id</code> &gt; <code>class</code> &gt; <code>tag</code> ]，同时遵循就近原则，<code>!important</code>比内联优先级高。</p>
+<h3 id="3、属性的继承"><a href="#3、属性的继承" class="headerlink" title="3、属性的继承"></a>3、属性的继承</h3><p>可继承的属性：<code>font-size</code>, <code>font-family</code>, <code>color</code>；</p>
+<p>不可继承的样式：<code>border</code>, <code>padding</code>, <code>margin</code>, <code>width</code>, <code>height</code>。</p>
+<h3 id="4、at规则"><a href="#4、at规则" class="headerlink" title="4、at规则"></a>4、<code>at</code>规则</h3><p><code>css</code>除了普通的选择器 + 声明块的规则外，还有一种<code>@</code>规则。用来描述样式使用的字符集、引入外部样式、条件判断等等。</p>
+<ul>
+<li><code>@charset</code>：定义样式表使用的字符集。</li>
+<li><code>@import</code>：告诉 CSS 引擎引入一个外部样式表。</li>
+<li><code>@media</code>：媒体查询。</li>
+<li><code>@keyframes</code>：用于定义<code>animation</code>的动画帧。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// @charset：定义样式表使用的字符集。</span></span><br><span class="line">@charset <span class="string">&quot;UTF-8&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// @import：告诉 CSS 引擎引入一个外部样式表。</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">&quot;font.css&quot;</span></span><br><span class="line"><span class="comment">// 第一个参数需要导入样式的地址。</span></span><br><span class="line">@<span class="keyword">import</span> <span class="title function_">url</span>(<span class="string">&quot;font.css&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 媒体查询</span></span><br><span class="line">@media screen &#123;</span><br><span class="line">    <span class="attr">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义动画</span></span><br><span class="line">@keyframes mymove</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">from</span> &#123;<span class="attr">top</span>:0px;&#125;</span><br><span class="line">    to &#123;<span class="attr">top</span>:200px;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="position属性"><a href="#position属性" class="headerlink" title="position属性"></a><code>position</code>属性</h2><ul>
+<li><code>static</code>静态定位，<code>position</code>的默认属性，按照正常文档流进行排列；</li>
+<li><code>relative</code>相对定位，参考自身静态位置通过<code>top</code>，<code>bottom</code>，<code>left</code>，<code>right</code>定位；</li>
+<li><code>absolute</code>绝对定位，参考距其最近一个不为<code>static</code>的父级元素通过<code>top</code>，<code>bottom</code>，<code>left</code>，<code>right</code>定位；</li>
+<li><code>fixed</code>固定定位，以浏览器的可视窗口为参照点；</li>
+<li><code>sticky</code><a target="_blank" rel="noopener" href="https://note.youdao.com/s/HY3RuuMi">粘性定位</a>，可以被认为是相对定位和固定定位的混合。</li>
+</ul>
+<h2 id="雪碧图"><a href="#雪碧图" class="headerlink" title="雪碧图"></a>雪碧图</h2><p>参照<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43353088/article/details/109124269">雪碧图的原理与实例解释</a>。</p>
+<h2 id="水平垂直居中的实现方案"><a href="#水平垂直居中的实现方案" class="headerlink" title="水平垂直居中的实现方案"></a>水平垂直居中的实现方案</h2><h3 id="1、普通行内元素"><a href="#1、普通行内元素" class="headerlink" title="1、普通行内元素"></a>1、普通行内元素</h3><p>利用<code>line-height</code>实现垂直居中。</p>
+<h3 id="2、普通块级元素"><a href="#2、普通块级元素" class="headerlink" title="2、普通块级元素"></a>2、普通块级元素</h3><p>利用设置<code>margin: 0 auto; text-align: center;</code>实现水平居中。</p>
+<h3 id="3、浮动元素"><a href="#3、浮动元素" class="headerlink" title="3、浮动元素"></a>3、浮动元素</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">float</span>: left;</span><br><span class="line"><span class="attr">position</span>: absolute;</span><br><span class="line"><span class="attr">width</span>: 200px;</span><br><span class="line"><span class="attr">height</span>: 100px;</span><br><span class="line"><span class="attr">left</span>: <span class="number">50</span>%;</span><br><span class="line"><span class="attr">top</span>: <span class="number">50</span>%;</span><br><span class="line"><span class="attr">margin</span>: -50px <span class="number">0</span> <span class="number">0</span> -100px; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4、绝对定位元素"><a href="#4、绝对定位元素" class="headerlink" title="4、绝对定位元素"></a>4、绝对定位元素</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">border</span>: 1px solid black;</span><br><span class="line"><span class="attr">position</span>: absolute;</span><br><span class="line"><span class="attr">width</span>: 200px;</span><br><span class="line"><span class="attr">height</span>: 100px;</span><br><span class="line"><span class="attr">margin</span>: <span class="number">0</span> auto;</span><br><span class="line"><span class="attr">left</span>: <span class="number">0</span>;</span><br><span class="line"><span class="attr">right</span>: <span class="number">0</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="5、利用transform实现"><a href="#5、利用transform实现" class="headerlink" title="5、利用transform实现"></a>5、利用<code>transform</code>实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">position</span>: absolute;</span><br><span class="line"><span class="attr">top</span>: <span class="number">50</span>%;</span><br><span class="line"><span class="attr">left</span>: <span class="number">50</span>%;</span><br><span class="line"><span class="attr">transform</span>: <span class="title function_">translate</span>(-<span class="number">50</span>%, -<span class="number">50</span>%);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="6、利用flex布局实现"><a href="#6、利用flex布局实现" class="headerlink" title="6、利用flex布局实现"></a>6、利用<code>flex</code>布局实现</h3><p>给居中元素的父级设置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">display</span>: flex;</span><br><span class="line">justify-<span class="attr">content</span>: center;</span><br><span class="line">align-<span class="attr">items</span>: center;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="7、table-cell"><a href="#7、table-cell" class="headerlink" title="7、table-cell"></a>7、<code>table-cell</code></h3><p>给居中元素的父级设置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">display</span>: table-cell;</span><br><span class="line">vertical-<span class="attr">align</span>: middle;</span><br><span class="line">text-<span class="attr">align</span>: center；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Sass与Less"><a href="#Sass与Less" class="headerlink" title="Sass与Less"></a><code>Sass</code>与<code>Less</code></h2><h3 id="1、什么是CSS预处理器？"><a href="#1、什么是CSS预处理器？" class="headerlink" title="1、什么是CSS预处理器？"></a>1、什么是<code>CSS</code>预处理器？</h3><p><code>CSS</code>预处理器是一种脚本语言，用一种专门的编程语言来进行<code>Web</code> 页面样式设计，然后再转换为正常的<code>CSS</code>样式，进而实现构建动态<code>CSS</code>样式。</p>
+<p><code>CSS</code>预处理器为<code>CSS</code>增加了一些编程的特性，无需考虑浏览器的兼容性问题。</p>
+<p><code>Sass</code>和<code>Less</code>就是两种常见的<code>CSS</code>预处理器，我们可以把<code>Sass</code>和<code>Less</code>编辑的样式转换为正常<code>css</code>样式。</p>
+<h3 id="2、Sass与Less的本质区别"><a href="#2、Sass与Less的本质区别" class="headerlink" title="2、Sass与Less的本质区别"></a>2、<code>Sass</code>与<code>Less</code>的本质区别</h3><ol>
+<li><code>less</code>是基于<code>javascript</code>运行，所以<code>less</code>是在客户端处理。<code>sass</code>是基于<code>Ruby</code>的，是在服务器端处理。</li>
+<li>编写变量的方式不同。<code>less</code>使用<code>@</code>,而<code>sass</code>使用<code>$</code>。</li>
+<li>在<code>less</code>中，仅允许循环数值。在<code>Sass</code>中，我们可以遍历任何类型的数据；但在<code>Less</code>中，我们只能使用递归函数循环数值。</li>
+<li><code>Sass</code>有<code>Compass</code>，<code>Less</code>有<code>Preboot</code>。都是用于集成<code>mixins</code>的扩展（在整个站点中存储和共享CSS声明的能力），<code>LESS</code>的软件支持比<code>Sass</code>更加分散，导致许多不同的扩展选项可能不会以相同的方式运行。对于项目，我们可能需要所有列出的扩展以获得与<code>Compass</code>类似的性能。</li>
+</ol>
+<h3 id="3、Less和Sass的用法区别"><a href="#3、Less和Sass的用法区别" class="headerlink" title="3、Less和Sass的用法区别"></a>3、<code>Less</code>和<code>Sass</code>的用法区别</h3><h4 id="1-1-变量"><a href="#1-1-变量" class="headerlink" title="1.1 变量: @ $"></a>1.1 变量: @ $</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// less</span><br><span class="line"><span class="keyword">@width</span>: <span class="number">5em</span>;</span><br><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: @width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// sass</span><br><span class="line">$<span class="attribute">width</span>: <span class="number">5em</span>;</span><br><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: $width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="1-2-混合-Mixin"><a href="#1-2-混合-Mixin" class="headerlink" title="1.2 混合(Mixin)"></a>1.2 混合(<code>Mixin</code>)</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// less</span><br><span class="line"><span class="selector-class">.border</span> &#123;</span><br><span class="line">   <span class="attribute">border-top</span>: <span class="number">1px</span> dotted <span class="number">#333</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">article</span><span class="selector-class">.post</span> &#123;</span><br><span class="line">   <span class="attribute">background</span>: <span class="number">#eee</span>;</span><br><span class="line">   <span class="selector-class">.border</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//sass</span><br><span class="line"><span class="keyword">@mixin</span> border&#123; //样式规则前面添加<span class="keyword">@minix</span>声明，规则它是个嵌套</span><br><span class="line">   <span class="attribute">border-top</span>: <span class="number">1px</span> dotted #<span class="number">333</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">article</span><span class="selector-class">.post</span> &#123;</span><br><span class="line">   <span class="attribute">background</span>: <span class="number">#eee</span>;</span><br><span class="line">   <span class="keyword">@include</span> border;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="1-3-带参数混合-Parametric-mixins"><a href="#1-3-带参数混合-Parametric-mixins" class="headerlink" title="1.3 带参数混合(Parametric mixins)"></a>1.3 带参数混合(<code>Parametric mixins</code>)</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//less</span><br><span class="line"><span class="selector-class">.border-radius</span>(<span class="keyword">@radius</span>:3px)&#123;</span><br><span class="line">    -webkit-<span class="attribute">border-radius</span>: @radius;</span><br><span class="line">    -moz-<span class="attribute">border-radius</span>: @radius;</span><br><span class="line">    <span class="attribute">border-radius</span>: @radius;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.border-radius</span>(<span class="number">10px</span>)</span><br><span class="line"> </span><br><span class="line">//sass</span><br><span class="line"><span class="keyword">@mixin</span> border-radius($<span class="attribute">radius</span>:<span class="number">3px</span>)&#123;</span><br><span class="line">    -webkit-<span class="attribute">border-radius</span>: $radius;</span><br><span class="line">    -moz-<span class="attribute">border-radius</span>: $radius;</span><br><span class="line">    <span class="attribute">border-radius</span>: $radius;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@include</span> border-radius(<span class="number">10px</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="1-4-选择器继承"><a href="#1-4-选择器继承" class="headerlink" title="1.4 选择器继承"></a>1.4 选择器继承</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-class">.menu</span>&#123;</span><br><span class="line">    <span class="attribute">border</span>:<span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.footer</span>&#123;</span><br><span class="line">    <span class="keyword">@extend</span> .menu;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//等同于=====</span><br><span class="line"><span class="selector-class">.menu</span>, <span class="selector-class">.footer</span>&#123;</span><br><span class="line">    <span class="attribute">border</span>:<span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="1-5-嵌套规则-Nested-rules"><a href="#1-5-嵌套规则-Nested-rules" class="headerlink" title="1.5 嵌套规则(Nested rules)"></a>1.5 嵌套规则(<code>Nested rules</code>)</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-class">.post-header</span>&#123;</span><br><span class="line">    <span class="selector-tag">h2</span>&#123;&#125;</span><br><span class="line">    <span class="selector-tag">a</span>&#123;</span><br><span class="line">        &amp;:visted&#123;&#125;</span><br><span class="line">        &amp;<span class="selector-pseudo">:hover</span>&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="1-6-运算"><a href="#1-6-运算" class="headerlink" title="1.6 运算"></a>1.6 运算</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//less</span><br><span class="line"><span class="keyword">@base_margin</span>: <span class="number">10px</span>;</span><br><span class="line"><span class="keyword">@double_margin</span>: @base_margin*<span class="number">2</span>;</span><br><span class="line"> </span><br><span class="line">//sass,可以直接换算单位</span><br><span class="line"><span class="number">2in</span> + <span class="number">3cm</span> + <span class="number">2px</span> = <span class="number">3.514in</span>;    //sass</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="1-7-条件语句和控制"><a href="#1-7-条件语句和控制" class="headerlink" title="1.7 条件语句和控制"></a>1.7 条件语句和控制</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//less不支持这个功能</span><br><span class="line"> </span><br><span class="line">//sass if..<span class="selector-class">.else</span></span><br><span class="line"><span class="keyword">@if</span> lightness($<span class="attribute">color</span>)&gt;<span class="number">30%</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>:<span class="number">#000</span>;</span><br><span class="line">&#125;<span class="keyword">@else</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>:<span class="number">#ccc</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//sass中简单的for循环语句</span><br><span class="line"><span class="keyword">@for</span> $i from <span class="number">1px</span> to <span class="number">10px</span>&#123;</span><br><span class="line">    <span class="selector-class">.border-</span>#&#123;<span class="selector-tag">i</span>&#125;&#123;</span><br><span class="line">        <span class="attribute">border</span>:$i solid blue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//sass甚至支持and、or和not，以及&lt;,&gt;,&lt;= ,&gt;= ,==等操作符</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="1-8-命名空间"><a href="#1-8-命名空间" class="headerlink" title="1.8 命名空间"></a>1.8 命名空间</h4><p>将一些公用的样式创建分组，使用的时候直接调用</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="selector-id">#defaults</span>&#123;</span><br><span class="line">    <span class="selector-class">.nav_list</span>()&#123;</span><br><span class="line">        <span class="attribute">list-style</span>:none;</span><br><span class="line">        <span class="attribute">margin</span>:<span class="number">0</span>;</span><br><span class="line">        <span class="attribute">padding</span>:<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.button</span>()&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">//调用</span><br><span class="line"><span class="selector-tag">nav</span> <span class="selector-tag">ul</span>&#123;</span><br><span class="line">    <span class="selector-id">#defaults</span> &gt; <span class="selector-class">.nav_list</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="css模块化方案、按需加载、防止阻塞渲染"><a href="#css模块化方案、按需加载、防止阻塞渲染" class="headerlink" title="css模块化方案、按需加载、防止阻塞渲染"></a><code>css</code>模块化方案、按需加载、防止阻塞渲染</h2><p><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15495832/5136652">浅谈CSS模块化</a></p>
+<p>可以利用<code>webpack</code>的<code>require.ensure()</code>实现按需加载。</p>
+<h3 id="1、如何防止CSS阻塞渲染"><a href="#1、如何防止CSS阻塞渲染" class="headerlink" title="1、如何防止CSS阻塞渲染"></a>1、如何防止<code>CSS</code>阻塞渲染</h3><p>可参考文章：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/goloving/p/9286521.html">CSS阻塞渲染、怎么防止css阻塞</a></p>
+<p>默认情况下，<code>CSS</code>被视为阻塞渲染的资源，这意味着浏览器将不会渲染任何已处理的内容，直至<code>CSSOM</code>构建完毕。请务必精简您的 <code>CSS</code>，并利用媒体类型和查询来解除对渲染的阻塞。</p>
+<p>我们可以通过<code>CSS</code>“媒体类型”和“媒体查询”来解决这类用例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;link href=<span class="string">&quot;style.css&quot;</span> rel=<span class="string">&quot;stylesheet&quot;</span>&gt;</span><br><span class="line">&lt;link href=&quot;print.css&quot; rel=&quot;stylesheet&quot; media=&quot;print&quot;&gt;</span><br><span class="line">&lt;link href=&quot;other.css&quot; rel=&quot;stylesheet&quot; media=&quot;(min-width: 40em)&quot;&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>媒体查询由媒体类型以及零个或多个检查特定媒体特征状况的表达式组成。</p>
+<p>例如，上面的第一个样式表声明未提供任何媒体类型或查询，因此它适用于所有情况，也就是说，它始终会阻塞渲染。第二个样式表则不然，它只在打印内容时适用—或许您想重新安排布局、更改字体等等，因此在网页首次加载时，该样式表不需要阻塞渲染。最后，最后一个样式表声明提供由浏览器执行的“媒体查询”：符合条件时，浏览器将阻塞渲染，直至样式表下载并处理完毕。</p>
+<h2 id="css动画"><a href="#css动画" class="headerlink" title="css动画"></a><code>css</code>动画</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Animations/Using_CSS_animations">使用 CSS 动画 | MDN</a></p>
+<h2 id="响应式布局"><a href="#响应式布局" class="headerlink" title="响应式布局"></a>响应式布局</h2><h3 id="1、px、em、rem、-、vw、vh单位之间的区别"><a href="#1、px、em、rem、-、vw、vh单位之间的区别" class="headerlink" title="1、px、em、rem、%、vw、vh单位之间的区别"></a>1、<code>px</code>、<code>em</code>、<code>rem</code>、<code>%</code>、<code>vw</code>、<code>vh</code>单位之间的区别</h3><ul>
+<li><code>px</code>就是<code>pixel</code>（像素）的缩写，相对长度单位，相对于屏幕分辨率。</li>
+<li><code>rem</code>是相对于根元素的相对长度单位，常用于响应式布局。</li>
+<li><code>em</code>是相对于父元素的相对长度单位。</li>
+<li><code>%</code>相对于** 包含块 **（有父元素相对于父元素，无父元素相对于视口，或者继承于父元素）的计量单位。</li>
+<li><code>vw</code>和<code>vh</code>由视窗（<code>Viewport</code>）大小来决定的，单位<code>1</code>，代表类似于<code>1%</code>。</li>
+</ul>
+<h3 id="2、响应式布局常用方案"><a href="#2、响应式布局常用方案" class="headerlink" title="2、响应式布局常用方案"></a>2、响应式布局常用方案</h3><ul>
+<li>媒体查询，根据不同屏幕宽度设置根元素font-size；之后设置rem，基于根元素计算相对单位。</li>
+<li>vw&#x2F;vh</li>
+</ul>
+<h3 id="3、rem弊端"><a href="#3、rem弊端" class="headerlink" title="3、rem弊端"></a>3、<code>rem</code>弊端</h3><p><code>rem</code>弊端：如果使用媒体查询设置，结果呈现阶梯状，在某一阶段，无法改变。</p>
+<h3 id="4、网页视口尺寸"><a href="#4、网页视口尺寸" class="headerlink" title="4、网页视口尺寸"></a>4、网页视口尺寸</h3><ul>
+<li>window.screen.height &#x2F;&#x2F; 屏幕高度</li>
+<li>window.innerHeight &#x2F;&#x2F;网页视口高度</li>
+<li>document.body.clientHeight &#x2F;&#x2F;body高度</li>
+</ul>
+<p><code>vh</code>：网页视口高度<code>window.innerHeight</code>的1&#x2F;100；</p>
+<p><code>vw</code>：网页视口宽度<code>window.innerWidth</code>的1&#x2F;100；</p>
+<p><code>vmax</code>：取<code>vh</code>和<code>vw</code>中的最大值；<code>vmin</code>：取<code>vh</code>和<code>vw</code>中的最小值。</p>
+<h2 id="float布局"><a href="#float布局" class="headerlink" title="float布局"></a><code>float</code>布局</h2><h3 id="1、圣杯布局、双飞翼布局"><a href="#1、圣杯布局、双飞翼布局" class="headerlink" title="1、圣杯布局、双飞翼布局"></a>1、圣杯布局、双飞翼布局</h3><h4 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h4><ul>
+<li>三栏布局，中间一栏最先渲染和加载</li>
+<li>两侧内容固定，中间内容宽度自适应</li>
+<li>一般用于<code>pc</code>网页</li>
+</ul>
+<h4 id="圣杯布局的实现"><a href="#圣杯布局的实现" class="headerlink" title="圣杯布局的实现"></a>圣杯布局的实现</h4><ol>
+<li>使用<code>float</code>和<code>margin</code>实现；</li>
+<li>使用<code>flex</code>布局；</li>
+<li>设置<code>padding</code>和绝对定位。</li>
+</ol>
+<h2 id="margin"><a href="#margin" class="headerlink" title="margin"></a>margin</h2><h3 id="margin取负值？"><a href="#margin取负值？" class="headerlink" title="margin取负值？"></a>margin取负值？</h3><ul>
+<li><code>margin-top</code>、<code>margin-left</code>负值，元素分别上移、左移；</li>
+<li><code>margin-bottom</code>负值，下方元素上移，自身不受影响；</li>
+<li><code>margin-right</code>负值，右侧元素左移，自身不受影响。</li>
+</ul>
+<h2 id="line-height如何继承？"><a href="#line-height如何继承？" class="headerlink" title="line-height如何继承？"></a><code>line-height</code>如何继承？</h2><p>例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;body style=<span class="string">&quot;font-size:20px; line-height: 200%;&quot;</span>&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">&quot;font-size: 14px;&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>line-height</code>值从父标签中已设置该值的元素继承，继承规则：</p>
+<ul>
+<li><code>line-height</code>为具体数值，如<code>30px</code>，直接继承该值；</li>
+<li>写比例，如2&#x2F;1.5，则继承该比例（14px*2）;</li>
+<li>写百分比，如200%，则继承计算出来的值（20px*200%)。</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Cecilia Li</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2022/06/26/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-Html%E7%AF%87/">前端基础 - Html篇</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Cecilia Li | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
