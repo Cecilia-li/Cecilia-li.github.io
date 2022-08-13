@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Cecilia Li">
+
+
+
+
+
+<title>JS 基础 - 数据类型和数据结构 | Cecilia 的博客(๑•̀ㅂ•́)و✧</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Cecilia&#39;s Blog (๑•̀ㅂ•́)و✧</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Cecilia&#39;s Blog (๑•̀ㅂ•́)و✧</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Archives</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">JS 基础 - 数据类型和数据结构</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Cecilia Li</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 21, 2022&nbsp;&nbsp;19:25:31</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E6%95%B4%E7%90%86/">知识体系整理</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="一、js中的八种数据类型"><a href="#一、js中的八种数据类型" class="headerlink" title="一、js中的八种数据类型"></a>一、<code>js</code>中的八种数据类型</h2><p><code>js</code>中的数据类型分为基本数据类型和引用数据类型</p>
+<ul>
+<li>基本数据类型：<code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>BigInt</code>、<code>Symbol</code>、<code>Null</code>、<code>Undefined</code>；</li>
+<li>引用类型（即对象类型<code>Object</code>）：如<code>Object</code>、<code>Function</code>、<code>Array</code>、<code>Date</code>。</li>
+</ul>
+<h2 id="二、js语言的底层数据结构"><a href="#二、js语言的底层数据结构" class="headerlink" title="二、js语言的底层数据结构"></a>二、<code>js</code>语言的底层数据结构</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41534913/article/details/102955100"> JavaScript 中的变量在内存中的具体存储形式</a></p>
+<ul>
+<li><strong><code>JavaScript</code>基本类型数据都是直接按值存储在栈中的</strong>，每种类型的数据占用的内存空间的大小是确定的，并由系统自动分配和自动释放。这样带来的好处就是，内存可以及时得到回收，相对于堆来说 ，更加容易管理内存空间。</li>
+<li><strong><code>JavaScript</code>引用类型数据的地址指针是存储于栈中的</strong>，当我们想要访问引用类型的值的时候，<strong>需要先从栈中获得对象的地址指针</strong>，然后，在通过地址指针找到堆中的所需要的数据。</li>
+</ul>
+<h2 id="三、Null-和-Undefined"><a href="#三、Null-和-Undefined" class="headerlink" title="三、Null 和 Undefined"></a>三、<code>Null</code> 和 <code>Undefined</code></h2><h3 id="1、Null"><a href="#1、Null" class="headerlink" title="1、Null"></a>1、<code>Null</code></h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/null">MDN</a> 上介绍：值<code>null</code>特指对象的值未设置。<code>null</code>是<code>JavaScript</code>基本类型之一，在布尔运算中被认为<code>falsy</code>。</p>
+<p><code>null</code>指示变量未指向任何对象。</p>
+<h3 id="2、Undefined"><a href="#2、Undefined" class="headerlink" title="2、Undefined"></a>2、<code>Undefined</code></h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined">MDN</a> 称：全局属性<code>undefined</code>表示原始值<code>undefined</code>。它是<code>JavaScript</code>的原始数据类型。</p>
+<p>对于一个已经定义了，但未赋值但变量，系统默认其类型为<code>Undefined</code>类型，值也为<code>undefined</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// undefined;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> a); <span class="comment">// undefined</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>一个函数如果没有使用<code>return</code>指定返回值，就会返回一个<code>undefined</code>值。</p>
+<h3 id="3、Null和Undefined的类型判断"><a href="#3、Null和Undefined的类型判断" class="headerlink" title="3、Null和Undefined的类型判断"></a>3、<code>Null</code>和<code>Undefined</code>的类型判断</h3><p>当检测<code>null</code>或<code>undefined</code>时，需要注意相等<code>(==)</code>与全等<code>(===)</code>两个操作符的区别，前者会进行类型转换。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span>        <span class="comment">// &quot;object&quot;</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span>   <span class="comment">// &quot;undefined&quot;</span></span><br><span class="line"><span class="literal">null</span> === <span class="literal">undefined</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">null</span>  == <span class="literal">undefined</span> <span class="comment">// true</span></span><br><span class="line"><span class="literal">null</span> === <span class="literal">null</span> <span class="comment">// true</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">null</span> <span class="comment">// true</span></span><br><span class="line">!<span class="literal">null</span> <span class="comment">//true</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="number">1</span> + <span class="literal">null</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="number">1</span> + <span class="literal">undefined</span>) <span class="comment">// true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4、undefined与null的区别"><a href="#4、undefined与null的区别" class="headerlink" title="4、undefined与null的区别"></a>4、<code>undefined</code>与<code>null</code>的区别</h3><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/03/undefined-vs-null.html"><code>undefined</code>与<code>null</code>的区别_ruanyifeng</a></p>
+<h2 id="四、Symbol类型"><a href="#四、Symbol类型" class="headerlink" title="四、Symbol类型"></a>四、<code>Symbol</code>类型</h2><h3 id="1、Symbol类型在实际开发中的应用"><a href="#1、Symbol类型在实际开发中的应用" class="headerlink" title="1、Symbol类型在实际开发中的应用"></a>1、<code>Symbol</code>类型在实际开发中的应用</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/celi_echo/article/details/99703094"> Symbol 的应用场景</a></p>
+<h3 id="2、手动实现一个简单的Symbol"><a href="#2、手动实现一个简单的Symbol" class="headerlink" title="2、手动实现一个简单的Symbol"></a>2、手动实现一个简单的<code>Symbol</code></h3><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000015262174">ES6 系列之模拟实现 Symbol 类型</a></p>
+<h2 id="五、Set"><a href="#五、Set" class="headerlink" title="五、Set"></a>五、<code>Set</code></h2><h3 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h3><p><code>Set</code>对象是值的集合，你可以按照插入的顺序迭代它的元素。<code>Set </code>中的元素只会出现一次，即<code>Set</code>中的元素是唯一的。</p>
+<h4 id="1-1-值的相等"><a href="#1-1-值的相等" class="headerlink" title="1.1 值的相等"></a>1.1 值的相等</h4><p><code>Set</code>内部判断两个值是否不同，使用的算法叫做“<code>Same-value-zero </code>”，它类似于精确相等运算符（<code>===</code>），主要的区别是向<code>Set</code> 加入值时认为<code>NaN</code>等于自身，而精确相等运算符认为<code>NaN</code>不等于自身。</p>
+<h3 id="2、constructor"><a href="#2、constructor" class="headerlink" title="2、constructor"></a>2、<code>constructor</code></h3><p>&#x3D;&#x3D;Set()&#x3D;&#x3D;：创建一个新的<code>Set</code>对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>]);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3、实例属性"><a href="#3、实例属性" class="headerlink" title="3、实例属性"></a>3、实例属性</h3><ul>
+<li><code>Set.prototype.size</code>：返回<code>Set</code>实例的成员总数。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="title class_">Set</span>();</span><br><span class="line">s.<span class="title function_">add</span>(<span class="number">1</span>).<span class="title function_">add</span>(<span class="number">2</span>).<span class="title function_">add</span>(<span class="number">2</span>);</span><br><span class="line"><span class="comment">// 注意2被加入了两次</span></span><br><span class="line"></span><br><span class="line">s.<span class="property">size</span> <span class="comment">// 2</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4、实例方法"><a href="#4、实例方法" class="headerlink" title="4、实例方法"></a>4、实例方法</h3><p><code>Set</code>实例的方法分为两大类：操作方法（用于操作数据）和遍历方法（用于遍历成员）。下面先介绍四个操作方法。</p>
+<h4 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h4><ul>
+<li><code>Set.prototype.add(value)</code>：在<code>Set</code>对象尾部添加一个元素。返回该<code>Set</code> 对象。</li>
+<li><code>Set.prototype.delete(value)</code>：移除值为<code>value</code> 的元素，并返回一个布尔值来表示是否移除成功。</li>
+<li><code>Set.prototype.has(value)</code>：返回一个布尔值，表示该值在<code>Set</code>中存在与否。</li>
+<li><code>Set.prototype.clear()</code>：清除所有成员，没有返回值。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="title class_">Set</span>();</span><br><span class="line">s.<span class="title function_">add</span>(<span class="number">1</span>).<span class="title function_">add</span>(<span class="number">2</span>).<span class="title function_">add</span>(<span class="number">2</span>);</span><br><span class="line"><span class="comment">// 注意2被加入了两次</span></span><br><span class="line"></span><br><span class="line">s.<span class="title function_">has</span>(<span class="number">1</span>) <span class="comment">// true</span></span><br><span class="line">s.<span class="title function_">has</span>(<span class="number">2</span>) <span class="comment">// true</span></span><br><span class="line">s.<span class="title function_">has</span>(<span class="number">3</span>) <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">s.<span class="title function_">delete</span>(<span class="number">2</span>);</span><br><span class="line">s.<span class="title function_">has</span>(<span class="number">2</span>) <span class="comment">// false</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="遍历操作"><a href="#遍历操作" class="headerlink" title="遍历操作"></a>遍历操作</h4><ul>
+<li><code>Set.prototype.keys()</code>：返回键名的遍历器。</li>
+<li><code>Set.prototype.values()</code>：返回键值的遍历器。</li>
+<li><code>Set.prototype.entries()</code>：返回键值对的遍历器。</li>
+<li><code>Set.prototype.forEach()</code>：使用回调函数遍历每个成员。</li>
+</ul>
+<p>由于<code>Set</code>结构没有键名，只有键值（或者说键名和键值是同一个值），所以&#x3D;&#x3D;<code>keys</code>方法和<code>values</code>方法的行为完全一致&#x3D;&#x3D;。</p>
+<h3 id="5、示例"><a href="#5、示例" class="headerlink" title="5、示例"></a>5、示例</h3><p><strong>具体使用示例可参照：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Set">Set | MDN</a></strong></p>
+<h2 id="六、Map"><a href="#六、Map" class="headerlink" title="六、Map"></a>六、<code>Map</code></h2><h3 id="1、简介-1"><a href="#1、简介-1" class="headerlink" title="1、简介"></a>1、简介</h3><p><code>Map</code>：<code>JavaScript</code>的对象（<code>Object</code>），本质上是键值对的集合（<code>Hash</code> 结构）。但普通的对象只能用字符串当作键；而对于<code>Map</code>对象，任何值（对象或者基本类型）都可以作为一个键或一个值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">map1.<span class="title function_">set</span>(<span class="string">&#x27;a&#x27;</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(map1.<span class="title function_">get</span>(<span class="string">&#x27;a&#x27;</span>));</span><br><span class="line"><span class="comment">// expected output: 1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>关于<code>Map</code>的属性及方法可以直接参照<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map"><code>Map</code> | <code>Mdn</code></a>。</strong></p>
+<h3 id="2、WeakMap和Map之间的区别？"><a href="#2、WeakMap和Map之间的区别？" class="headerlink" title="2、WeakMap和Map之间的区别？"></a>2、<code>WeakMap</code>和<code>Map</code>之间的区别？</h3><ol>
+<li><code>WeakMap</code>只接受对象作为键名（<code>null</code>除外），不接受其他类型的值作为键名。</li>
+<li>并且<code>key</code>值是弱引用，不计入垃圾回收机制。</li>
+<li><code>WeakMap</code>没有遍历操作和<code>size</code>属性。</li>
+</ol>
+<p>详细内容可参照：<a target="_blank" rel="noopener" href="https://es6.ruanyifeng.com/#docs/set-map#WeakMap"><code>WeakMap</code>与<code>Map</code>的区别_ruanyifeng</a></p>
+<h2 id="七、数据类型判断"><a href="#七、数据类型判断" class="headerlink" title="七、数据类型判断"></a>七、数据类型判断</h2><ol>
+<li>typeof</li>
+<li>instanceof</li>
+<li>toString</li>
+<li>constructor</li>
+</ol>
+<p>说明：</p>
+<ul>
+<li><code>typeof</code>：对于基本类型，除<code>null</code>外，均返回正确结果；对于引用类型，除<code>function</code>外，均返回<code>object</code>。</li>
+<li><code>instanceof</code>：<code>A instanceof B</code>，判断<code>A</code>是否为<code>B</code>的实例。<code>instanceof</code>检测的是<strong>原型</strong>，但<code>instanceof</code>只能用来判断两个对象是否属于实例关系，而不能判断一个对象实例具体属于哪种类型。</li>
+<li><code>constructor</code>：无法用于<code>null</code>和<code>undefined</code>。函数的<code>constructor</code>是不稳定的，当<code>protoype</code>被重写后，<code>constructor</code>会默认为<code>Object</code>。</li>
+<li><code>toString</code>：<code>toString</code>是<code>Object</code>的原型方法。对于<code>Object</code>对象，直接调用<code>toString()</code>方法；对于其他对象，需借助<code>call/apply</code>。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// typeof</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="string">&#x27;&#x27;</span>; <span class="comment">//string</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span>; <span class="comment">//object</span></span><br><span class="line"><span class="keyword">typeof</span> []; <span class="comment">//object</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> <span class="title class_">Function</span>; <span class="comment">//function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// instanceof</span></span><br><span class="line">[] <span class="keyword">instanceof</span> <span class="title class_">Array</span>; <span class="comment">//true</span></span><br><span class="line">[] <span class="keyword">instanceof</span> <span class="title class_">Object</span>; <span class="comment">//true</span></span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">isArray</span>([]); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// toString</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(<span class="string">&#x27;&#x27;</span>); <span class="comment">//[object String]</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(<span class="keyword">new</span> <span class="title class_">Date</span>()); <span class="comment">//[object Date]</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="title function_">toString</span>(&#123; <span class="attr">name</span>: <span class="string">&#x27;11&#x27;</span>&#125;); <span class="comment">//[object Object]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// constructor</span></span><br><span class="line"><span class="string">&#x27;&#x27;</span>.<span class="property">constructor</span> === <span class="title class_">String</span>; <span class="comment">//true</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Function</span>().<span class="property">constructor</span> === <span class="title class_">Function</span>; <span class="comment">//true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="八、类型转换"><a href="#八、类型转换" class="headerlink" title="八、类型转换"></a>八、类型转换</h2><h3 id="1、隐式转换"><a href="#1、隐式转换" class="headerlink" title="1、隐式转换"></a>1、隐式转换</h3><ol>
+<li>数字运算。“＋”：将表达式的值转换为<code>String</code>（仅当有一个是<code>String</code>类型）；“－”：将表达式的值转换为<code>Number</code>;</li>
+<li>两次取反（!!）；</li>
+<li><code>if</code>语句；</li>
+<li>＝＝</li>
+<li>逻辑运算符：逻辑与（&amp;&amp;）、逻辑或（||）、逻辑非（!）；</li>
+</ol>
+<p>&#x3D;&#x3D;隐式转换规律：&#x3D;&#x3D;</p>
+<ul>
+<li>‘string + number’字符串加数字，数字会转换为字符串；</li>
+<li>‘number - string’ 数字减字符串，字符串会转换为数字，如果字符串无法转换为数字（例如”abc”、“JavaScript”），则会转换为<code>NaN</code>；</li>
+<li>‘string - number’字符串减数字，字符串会转换为数字，如果字符串无法转换为数字，则会转换为<code>NaN</code>；即’➖’优先向数字转换。</li>
+<li>乘、除运算时，也会先将字符串转换为数字。</li>
+</ul>
+<p>可以巧妙地记一下，当字符串和数字同时存在时，除了加号运算符转化为字符串，其他减、乘和除都优先转化为数字。</p>
+<h3 id="2、强制类型转换（显式转换）"><a href="#2、强制类型转换（显式转换）" class="headerlink" title="2、强制类型转换（显式转换）"></a>2、强制类型转换（显式转换）</h3><p>出现显式转换的情况：<code>toString()</code>&#x2F;<code>String()</code>、<code>Number()</code>&#x2F;<code>parseInt()</code>&#x2F;<code>parseFloat()</code>、<code>Boolean()</code>等</p>
+<p>&#x3D;&#x3D;注意：&#x3D;&#x3D;</p>
+<ul>
+<li><code>null</code>和<code>undefined</code>没有<code>toString()</code>方法。</li>
+<li>使用<code>String()</code>时，对于<code>Number</code>和<code>Boolean</code>，就是调用<code>toString()</code>方法；对于<code>null</code>和<code>undefined</code>，并不会调用<code>toString()</code>方法。</li>
+<li>使用<code>Number()</code>时，若字符串中有非数字，则转换为<code>NaN</code>。<code>null</code>转为0，<code>undefined</code>转为<code>NaN</code>。</li>
+<li><code>parseInt()</code>可以将一个字符串中的有效的整数内容去出来，然后转换为<code>Number</code>。如果对非<code>String</code>使用<code>parseInt()</code>或<code>parseFloat()</code>，它会将其转换为<code>String</code>然后在操作。</li>
+</ul>
+<p>&#x3D;&#x3D;示例：&#x3D;&#x3D;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">123</span>;</span><br><span class="line">a = a.<span class="title function_">toString</span>(); <span class="comment">// &#x27;123&#x27;</span></span><br><span class="line">a = <span class="title class_">String</span>(a); <span class="comment">// &#x27;123&#x27;</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="literal">null</span>;</span><br><span class="line">a = a.<span class="title function_">toString</span>(); <span class="comment">// Uncaught TypeError</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">&#x27;123abc&#x27;</span>;</span><br><span class="line">a = <span class="title class_">Number</span>(a); <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">&#x27;123abc&#x27;</span>,</span><br><span class="line">    b = <span class="string">&#x27;12.34.56ab&#x27;</span>;</span><br><span class="line">a = <span class="built_in">parseInt</span>(a);</span><br><span class="line">b = <span class="built_in">parseFloat</span>(b);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">//123</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b); <span class="comment">//12.34</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="九、-和"><a href="#九、-和" class="headerlink" title="九、==和==="></a>九、<code>==</code>和<code>===</code></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 除了 == null之外，其它一律用 ===</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;a&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 判断obj有没有sex</span></span><br><span class="line"><span class="keyword">if</span> (obj.<span class="property">sex</span> == <span class="literal">null</span>) &#123;&#125;</span><br><span class="line"><span class="comment">// 相当于：</span></span><br><span class="line"><span class="comment">// if(obj.sex === null || obj.sex === undefined) &#123;&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="十、JavaScript可以存储的最大数字"><a href="#十、JavaScript可以存储的最大数字" class="headerlink" title="十、JavaScript可以存储的最大数字"></a>十、<code>JavaScript</code>可以存储的最大数字</h2><h3 id="1、最大数字"><a href="#1、最大数字" class="headerlink" title="1、最大数字"></a>1、最大数字</h3><ol>
+<li>最大数字：<code>Number.MAX_VALUE</code></li>
+<li>最大安全数字：<code>Number.MAX_SAFE_INTEGER</code>(<code>2^53</code>)</li>
+</ol>
+<h3 id="2、JavaScript数字精度丢失的解决方案"><a href="#2、JavaScript数字精度丢失的解决方案" class="headerlink" title="2、JavaScript数字精度丢失的解决方案"></a>2、<code>JavaScript</code>数字精度丢失的解决方案</h3><h4 id="2-1-第三方库Decimal"><a href="#2-1-第三方库Decimal" class="headerlink" title="2.1 第三方库Decimal"></a>2.1 第三方库<code>Decimal</code></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">x = <span class="keyword">new</span> <span class="title class_">Decimal</span>(<span class="number">0.1</span>);</span><br><span class="line">y = x.<span class="title function_">plus</span>(<span class="number">0.2</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="2-2-第三方库bignumber"><a href="#2-2-第三方库bignumber" class="headerlink" title="2.2 第三方库bignumber"></a>2.2 第三方库<code>bignumber</code></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">x = <span class="keyword">new</span> <span class="title class_">BigNumber</span>(<span class="number">0.1</span>);</span><br><span class="line">y = x.<span class="title function_">plus</span>(<span class="number">0.2</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="2-3-变成整数"><a href="#2-3-变成整数" class="headerlink" title="2.3 变成整数"></a>2.3 变成整数</h4><p>主要思想是：将小数先转换成拆分两个字符串，然后计算小数部分的字符串的长度，然后利用这个长度将小数变成整数！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">num1, num2</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> num1Len = (num1.<span class="title function_">toString</span>().<span class="title function_">split</span>(<span class="string">&#x27;.&#x27;</span>)[<span class="number">1</span>] ).<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">const</span> num2Len = (num2.<span class="title function_">toString</span>().<span class="title function_">split</span>(<span class="string">&#x27;.&#x27;</span>)[<span class="number">1</span>] ).<span class="property">length</span>;</span><br><span class="line">  <span class="keyword">const</span> maxLen = <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">10</span>, <span class="title class_">Math</span>.<span class="title function_">max</span>(num1Len, num2Len));</span><br><span class="line">  <span class="keyword">return</span> (num1 * maxLen + num2 * maxLen) / maxLen;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Cecilia Li</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%9D%A2%E8%AF%95/"># 面试</a>
+                    
+                        <a href="/tags/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"># 前端基础</a>
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/08/13/JS%E5%9F%BA%E7%A1%80-%E8%AF%AD%E6%B3%95%E5%92%8CAPI/">JS 基础 - 语法和 API</a>
+            
+            
+            <a class="next" rel="next" href="/2022/07/16/%E6%89%8B%E5%86%99-CSS-%E4%BB%A3%E7%A0%81/">手写 CSS 代码</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Cecilia Li | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

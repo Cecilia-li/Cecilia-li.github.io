@@ -13,7 +13,7 @@
 
 
 
-<title>前端基础 - Html 篇 | Cecilia 的博客(๑•̀ㅂ•́)و✧</title>
+<title>JS 基础 - 执行机制 | Cecilia 的博客(๑•̀ㅂ•́)و✧</title>
 
 
 
@@ -192,7 +192,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">前端基础 - Html 篇</h1>
+            <h1 class="post-title">JS 基础 - 执行机制</h1>
             
                 <div class="post-meta">
                     
@@ -201,7 +201,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">June 26, 2022&nbsp;&nbsp;16:48:28</a>
+                        Date: <a href="#">August 13, 2022&nbsp;&nbsp;17:38:49</a>
                         </span>
                     
                     
@@ -217,45 +217,41 @@
         </header>
 
         <div class="post-content">
-            <h2 id="如何理解html语义化？"><a href="#如何理解html语义化？" class="headerlink" title="如何理解html语义化？"></a>如何理解html语义化？</h2><ol>
-<li>让人更容易读懂（代码可读性）；</li>
-<li>让搜索引擎更易读懂（利于<code>SEO</code>）。</li>
-<li>&#x3D;&#x3D;语义结构仅仅是页面结构的规范化，并不会对内容有本质的影响。&#x3D;&#x3D;</li>
+            <h2 id="一、为何try里面放return，finally还会执行，理解其内部机制"><a href="#一、为何try里面放return，finally还会执行，理解其内部机制" class="headerlink" title="一、为何try里面放return，finally还会执行，理解其内部机制"></a>一、为何<code>try</code>里面放<code>return</code>，<code>finally</code>还会执行，理解其内部机制</h2><h3 id="1、try-catch时遇到return，finally还会继续执行吗"><a href="#1、try-catch时遇到return，finally还会继续执行吗" class="headerlink" title="1、try catch时遇到return，finally还会继续执行吗?"></a>1、<code>try</code> <code>catch</code>时遇到<code>return</code>，<code>finally</code>还会继续执行吗?</h3><ol>
+<li>不管有没有异常，<code>finally</code>中的代码都会执行</li>
+<li>当<code>try</code>、<code>catch</code>中有<code>return</code>时，<code>finally</code>中的代码依然会继续执行</li>
+<li><code>finally</code>是在<code>return</code>后面的表达式运算之后执行的，此时并没有返回运算之后的值，而是把值保存起来，不管<code>finally</code>对该值做任何的改变，返回的值都不会改变，依然返回保存起来的值。也就是说方法的返回值是在<code>finally</code>运算之前就确定了的。</li>
+<li>如果<code>return</code>的数据是引用数据类型，而在<code>finally</code>中对该引用数据类型的属性值的改变起作用，<code>try</code>中的<code>return</code>语句返回的就是在<code>finally</code>中改变后的该属性的值。</li>
+<li><code>finally</code>代码中最好不要包含<code>return</code>，程序会提前退出，也就是说返回的值不是<code>try</code>或<code>catch</code>中的值</li>
 </ol>
-<h2 id="元信息类标签"><a href="#元信息类标签" class="headerlink" title="元信息类标签"></a>元信息类标签</h2><p>元信息类标签：<code>head</code>、<code>title</code>、<code>meta</code>。</p>
-<h3 id="1、head标签"><a href="#1、head标签" class="headerlink" title="1、head标签"></a>1、<code>head</code>标签</h3><p><code>head</code>标签本身<strong>并不携带任何信息</strong>，它主要是作为盛放其它语义化标签的容器使用。</p>
-<p><code>head</code>标签规定了自身必须是<code>html</code>标签中的第一个标签，它的内容必须包含一个<code>title</code> ,且只能包含一个<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_base.asp"><code>base</code></a>。如果文档作为<code>iframe</code>，或者有其它方式制定了文档标题的话，可以允许不包含<code>title</code>标签。</p>
-<h3 id="2、title标签"><a href="#2、title标签" class="headerlink" title="2、title标签"></a>2、<code>title</code>标签</h3><p><code>title</code>作为元信息，可能会被用在浏览器收藏夹、微信推送卡片等场景，所以<code>title</code><strong>应该是完整的概括整个网页内容的</strong>。</p>
-<h3 id="3、meta标签"><a href="#3、meta标签" class="headerlink" title="3、meta标签"></a>3、<code>meta</code>标签</h3><p>在<code>head</code>中可以出现多个<code>meta</code>标签。一般的<code>meta</code>标签由<code>name</code>和<code>content</code>两个属性来定义。</p>
-<h4 id="name为viewport的meta"><a href="#name为viewport的meta" class="headerlink" title="name为viewport的meta"></a><code>name</code>为<code>viewport</code>的<code>meta</code></h4><p>使用于移动端。它的<code>content</code>是一个复杂结构，能配置的全部属性如下：</p>
 <ul>
-<li><code>width</code>：页面宽度，可以取值具体的数字，也可以是<code>device-width</code>，表示跟设备宽度相等。</li>
-<li><code>height</code>：页面高度，可以取值具体的数字，也可以是<code>device-height</code>，表示跟设备高度相等。</li>
-<li><code>initial-scale</code>：初始缩放比例。</li>
-<li><code>minimum-scale</code>：最小缩放比例。</li>
-<li><code>maximum-scale</code>：最大缩放比例。</li>
-<li><code>user-scalable</code>：是否允许用户缩放。</li>
+<li>先执行<code>try</code>中的语句，包括<code>return</code>后面的表达式，<br>有异常时,先执行<code>catch</code>中的语句，包括<code>return</code>后面的表达式,<br>然后执行<code>finally</code>中的语句,如果<code>finally</code>里面有<code>return</code>语句，会提前退出，<br>最后执行<code>try</code>中的<code>return</code>，有异常时执行<code>catch</code>中的<code>return</code>。</li>
+<li>在执行<code>try</code>、<code>catch</code>中的<code>return</code>之前一定会执行<code>finally</code>中的代码（如果<code>finally</code>存在），如果<code>finally</code>中有<code>return</code>语句，就会直接执行<code>finally</code>中的<code>return</code>方法，所以<code>finally</code>中的<code>return</code>语句一定会被执行的。编译器把<code>finally</code>中的<code>return</code>语句标识为一个<code>warning</code>。</li>
 </ul>
-<p>一个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;meta name=<span class="string">&quot;viewport&quot;</span> content=<span class="string">&quot;width=device, initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no&quot;</span>&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="其它预定义的meta"><a href="#其它预定义的meta" class="headerlink" title="其它预定义的meta"></a>其它预定义的<code>meta</code></h4><ul>
-<li><code>keywords</code>：页面关键字，对于<code>SEO</code>场景非常关键。</li>
-<li><code>referrer</code>：跳转策略，是一种安全考量。</li>
-<li><code>description</code>：页面描述，可能被用于搜索引擎或者其它场景。</li>
+<h3 id="2、JavaScript为何在try中return后finally还会执行？"><a href="#2、JavaScript为何在try中return后finally还会执行？" class="headerlink" title="2、JavaScript为何在try中return后finally还会执行？"></a>2、<code>JavaScript</code>为何在<code>try</code>中<code>return</code>后<code>finally</code>还会执行？</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/580a88a9493b">JavaScript 为何在 try 中 return 后 finally 还会执行？</a></p>
+<h2 id="二、Event-Loop"><a href="#二、Event-Loop" class="headerlink" title="二、Event Loop"></a>二、<code>Event Loop</code></h2><h3 id="1、Event-Loop"><a href="#1、Event-Loop" class="headerlink" title="1、Event Loop"></a>1、<code>Event Loop</code></h3><p><a target="_blank" rel="noopener" href="https://www.jb51.net/article/233340.htm">Javascript 运行机制之 Event Loop</a></p>
+<p><code>JS</code>中的异步（<code>setTimeOut</code>、<code>ajax</code>等）要基于回调来实现，<code>event loop</code>就是异步回调的实现原理。</p>
+<p><code>DOM</code>事件也使用回调，基于<code>event loop</code>。</p>
+<h3 id="2、宏任务和微任务"><a href="#2、宏任务和微任务" class="headerlink" title="2、宏任务和微任务"></a>2、宏任务和微任务</h3><p>微任务执行时机比宏任务早。</p>
+<h4 id="宏任务"><a href="#宏任务" class="headerlink" title="宏任务"></a>宏任务</h4><ul>
+<li><code>setTimeout</code></li>
+<li><code>setInterval</code></li>
+<li><code>Ajax</code></li>
+<li><code>DOM</code>事件</li>
 </ul>
-<h2 id="HTML5离线缓存原理"><a href="#HTML5离线缓存原理" class="headerlink" title="HTML5离线缓存原理"></a><code>HTML5</code>离线缓存原理</h2><p><strong>离线缓存</strong>：在用户没有与因特网连接时，可以正常访问站点或应用，在用户与因特网连接时，更新用户机器上的缓存文件。</p>
-<p><strong>使用离线缓存的目的</strong>：</p>
-<ul>
-<li>离线状态也能正常访问</li>
-<li>提高访问速度</li>
-<li>减轻服务器响应压力</li>
+<h4 id="微任务"><a href="#微任务" class="headerlink" title="微任务"></a>微任务</h4><ul>
+<li><code>async-await</code></li>
+<li><code>Promise</code></li>
 </ul>
-<p>参考文章：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/294955ec653a">HTML5 的离线储存及其工作原理</a></p>
-<h3 id="1、Service-Workers"><a href="#1、Service-Workers" class="headerlink" title="1、Service Workers"></a>1、<code>Service Workers</code></h3><p>原理：<code>Service Workers</code>本质上充当<code>Web</code>应用程序、浏览器与网络（可用时）之间的代理服务器。这个<code>API</code>指在创建有效的离线体验，它会拦截网络请求并根据网络是否可用采取来适当的动作、更新来自服务器的的资源。它还提供入口以推送通知和访问后台同步<code>API</code>。</p>
-<h3 id="2、manifest"><a href="#2、manifest" class="headerlink" title="2、manifest"></a>2、<code>manifest</code></h3><p>原理：<code>HTML5</code>的离线存储是基于一个新建的<code>.appcache</code> 文件的缓存机制（不是存储技术） , 通过这个文件上的解析清单离线存储资源，这些资源就会像<code>cookie</code> 一样被存储了下来。之后当网络在处于离线状态下时，浏览器会通过被离线存储的数据进行页面展示。</p>
-<h2 id="对SEO的理解"><a href="#对SEO的理解" class="headerlink" title="对SEO的理解"></a>对<code>SEO</code>的理解</h2><p><code>SEO</code>：（<code>Search Engine Optimization</code>）搜索引擎优化，是一种利用搜索引擎的规则提高网站在有关搜索引擎内自然排名的方式。</p>
-<h3 id="如何实现SEO"><a href="#如何实现SEO" class="headerlink" title="如何实现SEO ?"></a>如何实现<code>SEO</code> ?</h3><p><code>meta</code>标签优化，设置TDK（T：title、D：description、K：keyword）。</p>
+<h4 id="微任务和宏任务的区别"><a href="#微任务和宏任务的区别" class="headerlink" title="微任务和宏任务的区别"></a>微任务和宏任务的区别</h4><ol>
+<li>宏任务：<code>DOM</code>渲染后触发，如<code>setTimeout</code></li>
+<li>微任务：<code>DOM</code>渲染前触发，如<code>Promise</code>。</li>
+</ol>
+<h3 id="3、Node与浏览器的EventLoop的差异"><a href="#3、Node与浏览器的EventLoop的差异" class="headerlink" title="3、Node与浏览器的EventLoop的差异"></a>3、<code>Node</code>与浏览器的<code>EventLoop</code>的差异</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37299525/article/details/125873564">node与浏览器eventLoop的差异</a></p>
+<h2 id="三、可以快速分析一个复杂的异步嵌套逻辑，并掌握分析方法"><a href="#三、可以快速分析一个复杂的异步嵌套逻辑，并掌握分析方法" class="headerlink" title="三、可以快速分析一个复杂的异步嵌套逻辑，并掌握分析方法"></a>三、可以快速分析一个复杂的异步嵌套逻辑，并掌握分析方法</h2><p>可以先把复杂的异步写法转换为简单写法。比如 <code>async、await</code>异步的这种写法，其原理就是回调函数。</p>
+<p>然后按照事件的循环机制进行分析。</p>
+<h2 id="四、如何在保证页面运行流畅的情况下处理海量数据"><a href="#四、如何在保证页面运行流畅的情况下处理海量数据" class="headerlink" title="四、如何在保证页面运行流畅的情况下处理海量数据"></a>四、如何在保证页面运行流畅的情况下处理海量数据</h2><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903938894872589">「前端进阶」高性能渲染十万条数据(时间分片)</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903982742110216">「前端进阶」高性能渲染十万条数据(虚拟列表)</a></p>
 
         </div>
 
@@ -283,7 +279,7 @@
                     
                         <a href="/tags/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/"># 前端基础</a>
                     
-                        <a href="/tags/Html/"># Html</a>
+                        <a href="/tags/JavaScript/"># JavaScript</a>
                     
                         
                 </span>
@@ -296,10 +292,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/07/02/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80-CSS%E7%AF%87/">前端基础 - CSS 篇</a>
+                <a class="prev" rel="prev" href="/2022/08/13/JS%E5%9F%BA%E7%A1%80-%E5%BC%82%E6%AD%A5/">JS 基础 - 异步</a>
             
             
-            <a class="next" rel="next" href="/2022/06/21/%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/">面试题整理</a>
+            <a class="next" rel="next" href="/2022/08/13/JS%E5%9F%BA%E7%A1%80-%E8%AF%AD%E6%B3%95%E5%92%8CAPI/">JS 基础 - 语法和 API</a>
             
         </section>
 
